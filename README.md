@@ -13,7 +13,7 @@
 
   <h2 align="center">💻 Tech Stack</h2>
   <p align="center">
-    <img src="https://skillicons.dev/icons?i=ts,python,nodejs&theme=dark" />
+    <img src="https://skillicons.dev/icons?i=ts,python,nodejs,html,css,js,react&theme=dark" />
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" width="48" height="48" title="Luau" />
   </p>
 
