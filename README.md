@@ -29,9 +29,48 @@
   <h2 align="center">🎮 Snake Game</h2>
   <div align="center" style="margin: 20px 0;">
     <div style="background: rgba(0,0,0,0.8); padding: 20px; border-radius: 15px; border: 2px solid #333; display: inline-block;">
-      <div style="color: #00ff00; font-size: 18px; margin-bottom: 10px;">Pontuação: <span id="snakeScore">0</span></div>
-      <canvas id="snakeCanvas" width="300" height="300" style="border: 2px solid #00ff00; background: #000; border-radius: 10px;"></canvas>
+      <div style="color: #00ff00; font-size: 18px; margin-bottom: 10px;">🐍 Jogo da Cobra Interativo</div>
+      
+      <!-- Snake Game usando HTML/CSS puro -->
+      <div style="width: 300px; height: 300px; border: 2px solid #00ff00; background: #000; border-radius: 10px; position: relative; overflow: hidden;">
+        
+        <!-- Cobra animada com movimento em loop -->
+        <div style="position: absolute; width: 18px; height: 18px; background: linear-gradient(45deg, #00ff00, #00cc00); border-radius: 3px; top: 40px; left: 40px; animation: snakeMove 4s infinite linear; box-shadow: 0 0 8px rgba(0,255,0,0.6);"></div>
+        <div style="position: absolute; width: 18px; height: 18px; background: linear-gradient(45deg, #00cc00, #00aa00); border-radius: 3px; top: 40px; left: 20px; animation: snakeMove 4s infinite linear 0.3s; box-shadow: 0 0 6px rgba(0,204,0,0.5);"></div>
+        <div style="position: absolute; width: 18px; height: 18px; background: linear-gradient(45deg, #00aa00, #008800); border-radius: 3px; top: 40px; left: 0px; animation: snakeMove 4s infinite linear 0.6s; box-shadow: 0 0 4px rgba(0,170,0,0.4);"></div>
+        
+        <!-- Comida animada com efeitos -->
+        <div style="position: absolute; width: 16px; height: 16px; background: radial-gradient(circle, #ff0000, #cc0000); border-radius: 50%; top: 80px; left: 180px; animation: foodPulse 1.5s infinite alternate; box-shadow: 0 0 12px rgba(255,0,0,0.8);"></div>
+        <div style="position: absolute; width: 16px; height: 16px; background: radial-gradient(circle, #ff0000, #cc0000); border-radius: 50%; top: 180px; left: 120px; animation: foodPulse 1.5s infinite alternate 0.7s; box-shadow: 0 0 12px rgba(255,0,0,0.8);"></div>
+        <div style="position: absolute; width: 16px; height: 16px; background: radial-gradient(circle, #ff0000, #cc0000); border-radius: 50%; top: 120px; left: 240px; animation: foodPulse 1.5s infinite alternate 1.4s; box-shadow: 0 0 12px rgba(255,0,0,0.8);"></div>
+        
+        <!-- Grid pattern sutil -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: 
+          linear-gradient(to right, rgba(0,255,0,0.1) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0,255,0,0.1) 1px, transparent 1px);
+          background-size: 20px 20px;"></div>
+        
+        <!-- Pontuação com efeito neon -->
+        <div style="position: absolute; top: 8px; left: 8px; color: #00ff00; font-size: 14px; font-weight: bold; animation: scoreBlink 3s infinite; text-shadow: 0 0 5px #00ff00;">
+          🐍 Score: 150
+        </div>
+        
+        <!-- Efeito de partículas -->
+        <div style="position: absolute; top: 60px; left: 100px; width: 4px; height: 4px; background: #00ff00; border-radius: 50%; animation: particleFloat 2s infinite linear;"></div>
+        <div style="position: absolute; top: 140px; left: 80px; width: 3px; height: 3px; background: #00ff00; border-radius: 50%; animation: particleFloat 2s infinite linear 0.5s;"></div>
+        <div style="position: absolute; top: 220px; left: 160px; width: 4px; height: 4px; background: #00ff00; border-radius: 50%; animation: particleFloat 2s infinite linear 1s;"></div>
+        
+        <!-- Game Over overlay com timing -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+             background: rgba(0,0,0,0.95); color: #ff0000; padding: 15px; border-radius: 8px; 
+             text-align: center; font-weight: bold; animation: gameOverFlash 8s infinite; border: 1px solid #ff0000;">
+          <div style="font-size: 16px;">💀 GAME OVER!</div>
+          <div style="font-size: 10px; color: #ccc; margin-top: 3px;">🎮 Demonstração do Jogo</div>
+        </div>
+      </div>
+      
       <div style="color: #ccc; font-size: 12px; margin-top: 10px;">
+        🎮 Demonstração do Jogo da Cobra | Animações CSS
       </div>
     </div>
   </div>
@@ -55,197 +94,45 @@
 </div>
 
 <style>
-  #snakeCanvas {
-    cursor: pointer;
+  /* Animações do Jogo da Cobra */
+  @keyframes snakeMove {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(200px) translateY(0); }
+    50% { transform: translateX(200px) translateY(200px); }
+    75% { transform: translateX(0) translateY(200px); }
+    100% { transform: translateX(0) translateY(0); }
   }
   
-  .game-over-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  @keyframes foodPulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.2); opacity: 0.7; }
   }
   
-  .game-over-content {
-    background: #1a1a1a;
-    padding: 30px;
-    border-radius: 15px;
-    border: 2px solid #ff0000;
-    text-align: center;
-    color: white;
+  @keyframes scoreBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
   }
   
-  .restart-btn {
-    background: #00ff00;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 15px;
+  @keyframes gameOverFlash {
+    0%, 80% { opacity: 0; }
+    85%, 95% { opacity: 1; }
+    100% { opacity: 0; }
   }
   
-  .restart-btn:hover {
-    background: #00cc00;
+  @keyframes particleFloat {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-20px) translateX(10px); opacity: 0.7; }
+    100% { transform: translateY(0) translateX(20px); opacity: 0; }
+  }
+  
+  /* Efeitos visuais adicionais */
+  .snake-segment {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  }
+  
+  .food-item {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
   }
 </style>
 
-<script>
-  const canvas = document.getElementById('snakeCanvas');
-  const ctx = canvas.getContext('2d');
-  const scoreElement = document.getElementById('snakeScore');
-
-  const gridSize = 15;
-  const tileCount = canvas.width / gridSize;
-
-  let snake = [{x: 10, y: 10}];
-  let food = {};
-  let dx = 0;
-  let dy = 0;
-  let score = 0;
-  let gameRunning = true;
-  let gamePaused = false;
-
-  function generateFood() {
-    food = {
-      x: Math.floor(Math.random() * tileCount),
-      y: Math.floor(Math.random() * tileCount)
-    };
-    
-    for (let segment of snake) {
-      if (segment.x === food.x && segment.y === food.y) {
-        generateFood();
-        return;
-      }
-    }
-  }
-
-  function drawGame() {
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i <= tileCount; i++) {
-      ctx.beginPath();
-      ctx.moveTo(i * gridSize, 0);
-      ctx.lineTo(i * gridSize, canvas.height);
-      ctx.moveTo(0, i * gridSize);
-      ctx.lineTo(canvas.width, i * gridSize);
-      ctx.stroke();
-    }
-
-    ctx.fillStyle = '#00ff00';
-    for (let segment of snake) {
-      ctx.fillRect(segment.x * gridSize + 1, segment.y * gridSize + 1, gridSize - 2, gridSize - 2);
-    }
-
-    if (snake.length > 0) {
-      ctx.fillStyle = '#00cc00';
-      ctx.fillRect(snake[0].x * gridSize + 2, snake[0].y * gridSize + 2, gridSize - 4, gridSize - 4);
-    }
-
-    ctx.fillStyle = '#ff0000';
-    ctx.fillRect(food.x * gridSize + 2, food.y * gridSize + 2, gridSize - 4, gridSize - 4);
-  }
-
-  function moveSnake() {
-    if (!gameRunning || gamePaused) return;
-
-    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-
-    if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
-      gameOver();
-      return;
-    }
-
-    for (let segment of snake) {
-      if (head.x === segment.x && head.y === segment.y) {
-        gameOver();
-        return;
-      }
-    }
-
-    snake.unshift(head);
-
-    if (head.x === food.x && head.y === food.y) {
-      score += 10;
-      scoreElement.textContent = score;
-      generateFood();
-    } else {
-      snake.pop();
-    }
-  }
-
-  function gameOver() {
-    gameRunning = false;
-    showGameOver();
-  }
-
-  function showGameOver() {
-    const overlay = document.createElement('div');
-    overlay.className = 'game-over-overlay';
-    overlay.innerHTML = `
-      <div class="game-over-content">
-        <h2 style="color: #ff0000; margin-bottom: 15px;">Game Over!</h2>
-        <p>Sua pontuação: <span style="color: #00ff00; font-size: 18px;">${score}</span></p>
-        <button class="restart-btn" onclick="restartSnakeGame()">Jogar Novamente</button>
-      </div>
-    `;
-    document.body.appendChild(overlay);
-  }
-
-  function restartSnakeGame() {
-    document.querySelector('.game-over-overlay')?.remove();
-    snake = [{x: 10, y: 10}];
-    dx = 0;
-    dy = 0;
-    score = 0;
-    gameRunning = true;
-    gamePaused = false;
-    scoreElement.textContent = score;
-    generateFood();
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (!gameRunning) return;
-
-    switch(e.key) {
-      case 'ArrowUp':
-        if (dy !== 1) { dx = 0; dy = -1; }
-        break;
-      case 'ArrowDown':
-        if (dy !== -1) { dx = 0; dy = 1; }
-        break;
-      case 'ArrowLeft':
-        if (dx !== 1) { dx = -1; dy = 0; }
-        break;
-      case 'ArrowRight':
-        if (dx !== -1) { dx = 1; dy = 0; }
-        break;
-      case ' ':
-        e.preventDefault();
-        gamePaused = !gamePaused;
-        break;
-    }
-  });
-
-  function gameLoop() {
-    moveSnake();
-    drawGame();
-    if (gameRunning) {
-      setTimeout(gameLoop, 150);
-    }
-  }
-
-  generateFood();
-  drawGame();
-  gameLoop();
-</script>
+<!-- Jogo da Cobra para GitHub - Versão HTML/CSS pura -->
