@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,100:3a3a3a&height=160&section=header&text=Misan&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Full%20Stack%20Developer%20%7C%20LofyGang&descSize=20&descAlignY=55"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,100:3a3a3a&height=160&section=header&text=Zephyraris&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Full%20Stack%20Developer%20%7C%20LofyGang&descSize=20&descAlignY=55"/>
 
   <img src="https://readme-typing-svg.herokuapp.com/?color=9f9f9f&size=24&center=true&vCenter=true&width=1000&lines=Welcome+to+my+Profile!;Building+the+future+with+code.;Always+learning+and+creating." />
 
@@ -19,10 +19,10 @@
 
   <h2 align="center">:globe_with_meridians: Contact</h2>
   <p align="center">
-    <a href="mailto:Misan@gmail.com" target="_blank">
+    <a href="mailto:Zephyraris@gmail.com" target="_blank">
       <img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white">
     </a>
-    <a href="https://instagram.com/Misan" target="_blank">
+    <a href="https://instagram.com/Zephyraris" target="_blank">
       <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white">
     </a>
     <a href="https://discord.gg/lofygang" target="_blank">
